@@ -1,0 +1,283 @@
+<?php
+
+namespace APIBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Product
+ *
+ * @ORM\Table(name="product")
+ * @ORM\Entity(repositoryClass="APIBundle\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Product
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reference", type="string", length=16, unique=true)
+     */
+    private $reference;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Provider", cascade={"all"}, fetch="EAGER")
+     */
+    private $provider;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="buying_price", type="decimal", precision=8, scale=2)
+     */
+    private $buyingPrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="selling_price", type="decimal", precision=8, scale=2)
+     */
+    private $sellingPrice;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdAt", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedAt", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive = false;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set reference
+     *
+     * @param string $reference
+     * @return Product
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * Get reference
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Product
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Product
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set buyingPrice
+     *
+     * @param string $buyingPrice
+     * @return Product
+     */
+    public function setBuyingPrice($buyingPrice)
+    {
+        $this->buyingPrice = $buyingPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get buyingPrice
+     *
+     * @return string
+     */
+    public function getBuyingPrice()
+    {
+        return $this->buyingPrice;
+    }
+
+    /**
+     * Set sellingPrice
+     *
+     * @param string $sellingPrice
+     * @return Product
+     */
+    public function setSellingPrice($sellingPrice)
+    {
+        $this->sellingPrice = $sellingPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get sellingPrice
+     *
+     * @return string
+     */
+    public function getSellingPrice()
+    {
+        return $this->sellingPrice;
+    }
+
+    /**
+     * Set createdAt
+     * @ORM\PrePersist
+     *
+     * @param \DateTime $createdAt
+     * @return Product
+     */
+    public function setCreatedAt()
+    {
+        $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     *
+     * @param \DateTime $updatedAt
+     * @return Product
+     */
+    public function setUpdatedAt()
+    {
+        $this->updatedAt = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Product
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+}
